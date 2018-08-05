@@ -33,12 +33,28 @@ console.log(users[0]);
 
 ////
 
-let averageAge = 0;
-
-for(let i = 0 ; users.length > i; i++) {
-    averageAge += users[i].age;
-}
-
-averageAge /= users.length;
-
+const initialValue = 0;
+let averageAge = users.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.age,
+    initialValue
+);
 console.log(averageAge);
+
+////
+
+/*const userAge = users.map(function () {
+    return users.age;
+});*/
+
+const uniqueAge = {};
+const userAge = Object.keys(users).map(function(key) {
+    return uniqueAge[users[key].age] += ` ${users[key].name}`;
+});
+
+/*const uniqueAge = userAge.filter(function(item, pos) {
+    return userAge.indexOf(item) === pos;
+});*/
+
+
+console.log(userAge);
+

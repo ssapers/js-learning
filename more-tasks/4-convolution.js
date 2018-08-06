@@ -1,6 +1,8 @@
 /*Найдите самого старшего.
 Посчитайте средний возраст.
 Сгруппируйте пользователей по возрасту.
+Найдите средний рейт для каждого возраста.
+Найдите максимальный из всех средних рейтов по возрастам.
 */
 
 const users = [
@@ -38,23 +40,30 @@ let averageAge = users.reduce(
     (accumulator, currentValue) => accumulator + currentValue.age,
     initialValue
 );
+averageAge = averageAge / users.length;
 console.log(averageAge);
 
 ////
 
-/*const userAge = users.map(function () {
-    return users.age;
-});*/
+const usersAge = {};
 
-const uniqueAge = {};
-const userAge = Object.keys(users).map(function(key) {
-    return uniqueAge[users[key].age] += ` ${users[key].name}`;
+users.forEach(function(user) {
+    let ageData = usersAge[user.age];
+
+    if (ageData) {
+        ageData.push(user);
+    } else {
+        usersAge[user.age] = [user];
+    }
 });
 
-/*const uniqueAge = userAge.filter(function(item, pos) {
-    return userAge.indexOf(item) === pos;
-});*/
+////
 
+const averageRate = {};
 
-console.log(userAge);
+for (let age in usersAge) {
+    averageRate[age] = usersAge[age].reduce((acc, user) => acc + user.rate, 0) / usersAge[age].length;
+}
+
+console.log(averageRate);
 

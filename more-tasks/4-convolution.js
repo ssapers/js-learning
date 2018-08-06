@@ -67,3 +67,12 @@ for (let age in usersAge) {
 
 console.log(averageRate);
 
+////
+
+let maxRate = 0;
+
+for(let rate in averageRate) {
+    maxRate = Math.max(maxRate, averageRate[rate])
+}
+
+console.log(maxRate);

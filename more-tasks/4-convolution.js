@@ -1,39 +1,15 @@
-/*Найдите самого старшего.
-Посчитайте средний возраст.
-Сгруппируйте пользователей по возрасту.
-Найдите средний рейт для каждого возраста.
-Найдите максимальный из всех средних рейтов по возрастам.
-*/
+const users = require('./data.js');
 
-const users = [
-    { name: 'Vasya', age: 19, rate: 900 },
-    { name: 'Dima', age: 18, rate: 1000 },
-    { name: 'Sveta', age: 13, rate: 85 },
-    { name: 'Peyta', age: 14, rate: 100 },
-    { name: 'Seryozha', age: 18, rate: 900 },
-    { name: 'Valera', age: 14, rate: 150 }
-];
-
-let maxAge = 0;
-let index = 0;
-
-for(let i = 0 ; users.length > i; i++) {
-    if(users[i].age > maxAge) {
-        maxAge = users[i].age;
-        index = i;
-    }
-}
-console.log(users[index]);
-
-// or
+//Найдите самого старшего.
 
 users.sort(function(a, b) {
-    return b.age - a.age;
+    return a.age - b.age;
 });
 
-console.log(users[0]);
+console.log(users.reduce((a, b) => a.age > b.age ? a.age : b.age));
 
-////
+
+// Посчитайте средний возраст.
 
 const initialValue = 0;
 let averageAge = users.reduce(
@@ -43,10 +19,10 @@ let averageAge = users.reduce(
 averageAge = averageAge / users.length;
 console.log(averageAge);
 
-////
+
+// Сгруппируйте пользователей по возрасту.
 
 const usersAge = {};
-
 users.forEach(function(user) {
     let ageData = usersAge[user.age];
 
@@ -57,7 +33,9 @@ users.forEach(function(user) {
     }
 });
 
-////
+console.log(usersAge);
+
+// Найдите средний рейт для каждого возраста.
 
 const averageRate = {};
 
@@ -67,7 +45,8 @@ for (let age in usersAge) {
 
 console.log(averageRate);
 
-////
+
+// Найдите максимальный из всех средних рейтов по возрастам.
 
 let maxRate = 0;
 
